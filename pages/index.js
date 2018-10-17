@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import Link from 'next/link';
 
-export class Home extends Component {
-  render() {
-    return <div>Home</div>;
-  }
-}
+const Home = (props) => {
+  return (
+    <div>
+      <p>Home</p>
+      <Link href="/sell">Sell</Link>
+    </div>
+  );
+};
 
 export default Home;
