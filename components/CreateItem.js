@@ -37,9 +37,9 @@ export class CreateItem extends Component {
   };
 
   handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, type, value } = e.target;
     this.setState({
-      [name]: name === 'price' ? parseFloat(value) : value
+      [name]: type === 'number' ? parseFloat(value) : value
     });
   };
 
