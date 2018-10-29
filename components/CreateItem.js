@@ -43,11 +43,6 @@ export class CreateItem extends Component {
     });
   };
 
-  submitForm = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
-
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
