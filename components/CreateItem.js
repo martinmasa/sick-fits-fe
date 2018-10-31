@@ -29,21 +29,43 @@ const CREATE_ITEM_MUTATION = gql`
 
 export class CreateItem extends Component {
   state = {
-    title: 'Cool Kicks',
-    description: 'Super cool pair of shoes',
-    price: 2340,
-    image: 'coolkicks.jpg',
-    largeImage: 'coolkicks-large.jpg'
+    title: '',
+    description: '',
+    price: 0,
+    image: '',
+    largeImage: ''
   };
 
   handleChange = (e) => {
     const { name, type, value } = e.target;
+    const val = type === 'number' && Number.isInteger(value) ? parseFloat(value) : value;
     this.setState({
-      [name]: type === 'number' ? parseFloat(value) : value
+      [name]: val
+    });
+  };
+
+  uploadFile = async (e) => {
+    console.log('uploadin file...');
+    const { files } = e.target;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'fitsick');
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/m10/image/upload', {
+      method: 'POST',
+      body: data
+    });
+
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url
     });
   };
 
   render() {
+    const { title, description, price, image } = this.state;
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { error, loading }) => (
@@ -60,6 +82,19 @@ export class CreateItem extends Component {
           >
             <ErrorMessage error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="file">
+                Image
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="Upload the product image"
+                  required
+                  onChange={this.uploadFile}
+                />
+                {image && <img src={image} alt="Upload preview" />}
+              </label>
+
               <label htmlFor="title">
                 Title
                 <input
@@ -68,7 +103,7 @@ export class CreateItem extends Component {
                   name="title"
                   placeholder="Title"
                   required
-                  value={this.state.title}
+                  value={title}
                   onChange={this.handleChange}
                 />
               </label>
@@ -81,7 +116,7 @@ export class CreateItem extends Component {
                   name="price"
                   placeholder="Price"
                   required
-                  value={this.state.price}
+                  value={price}
                   onChange={this.handleChange}
                 />
               </label>
@@ -93,7 +128,7 @@ export class CreateItem extends Component {
                   name="description"
                   placeholder="Enter A Description"
                   required
-                  value={this.state.description}
+                  value={description}
                   onChange={this.handleChange}
                 />
               </label>
