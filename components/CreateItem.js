@@ -27,7 +27,7 @@ const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
-export class CreateItem extends Component {
+class CreateItem extends Component {
   state = {
     title: '',
     description: '',
@@ -142,3 +142,4 @@ export class CreateItem extends Component {
 }
 
 export default CreateItem;
+export { CREATE_ITEM_MUTATION };
