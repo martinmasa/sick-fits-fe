@@ -41,11 +41,11 @@ const DisplayError = ({ error }) => {
 };
 
 DisplayError.defaultProps = {
-  error: {},
+  error: {}
 };
 
 DisplayError.propTypes = {
-  error: PropTypes.object,
+  error: PropTypes.object
 };
 
 export default DisplayError;
