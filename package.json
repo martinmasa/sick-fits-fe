@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test": "NODE_ENV=test jest --watch",
+    "test:ci": "NODE_ENV=test jest",
     "heroku-postbuild": "next build",
     "lint": "eslint --ext .js,.jsx,.es6 ./"
   },
@@ -16,7 +17,7 @@
   "dependencies": {
     "apollo-boost": "^0.1.16",
     "apollo-client": "^2.4.2",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel-core": "^7.0.0-bridge",
     "babel-plugin-styled-components": "^1.7.1",
     "date-fns": "^2.0.0-alpha.7",
     "downshift": "^2.2.3",
@@ -39,6 +40,7 @@
     "waait": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -53,10 +55,10 @@
     "graphql-tools": "^4.0.0",
     "jest": "^23.6.0",
     "jest-transform-graphql": "^2.1.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "react-testing-library": "^5.3.1"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
     "testPathIgnorePatterns": [
       "<rootDir>/.next/",
       "<rootDir>/node_modules/"
