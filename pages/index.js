@@ -4,8 +4,7 @@ import Items from '../components/Items';
 const Home = (props) => {
   return (
     <div>
-      <p>Home</p>
-      <Items />
+      <Items page={parseInt(props.query.page) || 1} />
     </div>
   );
 };
