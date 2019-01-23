@@ -7,9 +7,9 @@ import { CURRENT_USER_QUERY } from './User';
 import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($name: String!, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
       id
       name
       email
@@ -17,11 +17,10 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export class SignupForm extends Component {
+export class SigninForm extends Component {
   state = {
     email: '',
-    password: '',
-    name: ''
+    password: ''
   };
 
   saveToState = (e) => {
@@ -29,41 +28,30 @@ export class SignupForm extends Component {
   };
 
   render() {
-    const { email, password, name } = this.state;
+    const { email, password } = this.state;
 
     return (
       <Mutation
-        mutation={SIGNUP_MUTATION}
+        mutation={SIGNIN_MUTATION}
         variables={this.state}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {(signup, { error, loading }) => {
+        {(signin, { error, loading }) => {
           return (
             <Form
               method="post"
               onSubmit={async (e) => {
                 e.preventDefault();
-                await signup();
+                await signin();
                 this.setState({
                   email: '',
-                  password: '',
-                  name: ''
+                  password: ''
                 });
               }}
             >
-              <h2>Signup For An Account</h2>
+              <h2>Sign In To Your Account</h2>
               <ErrorMessage error={error} />
               <fieldset disabled={loading} aria-busy={loading}>
-                <label htmlFor="name">
-                  Name
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="name"
-                    value={name}
-                    onChange={this.saveToState}
-                  />
-                </label>
                 <label htmlFor="email">
                   Email
                   <input
@@ -85,7 +73,7 @@ export class SignupForm extends Component {
                   />
                 </label>
 
-                <button type="submit">Sign Up!</button>
+                <button type="submit">Sign In!</button>
               </fieldset>
             </Form>
           );
@@ -95,4 +83,4 @@ export class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default SigninForm;

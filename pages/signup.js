@@ -1,5 +1,7 @@
-import SignupForm from '../components/SignupForm';
 import styled from 'styled-components';
+
+import SignupForm from '../components/SignupForm';
+import SigninForm from '../components/SigninForm';
 
 const Columns = styled.section`
   display: grid;
@@ -11,6 +13,7 @@ const Signup = (props) => {
   return (
     <Columns>
       <SignupForm />
+      <SigninForm />
     </Columns>
   );
 };
