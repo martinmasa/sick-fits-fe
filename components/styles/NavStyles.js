@@ -18,6 +18,11 @@ const NavStyles = styled.ul`
     background: none;
     border: 0;
     cursor: pointer;
+    color: ${(props) => props.theme.black};
+    font-weight: 800;
+    font-size: 20px;
+    font-family: 'radnika_next';
+
     @media (max-width: 700px) {
       font-size: 10px;
       padding: 0 10px;
